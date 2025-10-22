@@ -40,7 +40,7 @@
       background: #bdbdbd;
     }
 
-    /* Overlay for fullscreen image */
+    /* Overlay (fullscreen mockup) */
     .overlay {
       position: fixed;
       top: 0; left: 0;
@@ -49,7 +49,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s;
@@ -62,27 +61,29 @@
 
     .overlay img {
       max-width: 90%;
-      max-height: 85%;
+      max-height: 90%;
       border-radius: 12px;
       box-shadow: 0 0 40px rgba(0,0,0,0.5);
-      margin-bottom: 40px;
+      transition: transform 0.3s ease;
     }
 
-    .back-btn {
-      background: none;
-      border: 2px solid white;
+    /* Back Arrow Button */
+    .back-arrow {
+      position: absolute;
+      top: 30px;
+      left: 40px;
+      font-size: 2rem;
       color: white;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-size: 1rem;
       cursor: pointer;
-      transition: 0.3s;
+      background: none;
+      border: none;
+      transition: transform 0.3s ease;
     }
 
-    .back-btn:hover {
-      background: white;
-      color: black;
+    .back-arrow:hover {
+      transform: translateX(-4px);
     }
+
   </style>
 </head>
 <body>
@@ -95,8 +96,8 @@
 
   <!-- Overlay -->
   <div class="overlay" id="overlay">
+    <button class="back-arrow" id="goBack">←</button>
     <img src="" alt="Mockup" id="overlay-img" />
-    <button class="back-btn" id="goBack">go back</button>
   </div>
 
   <script>
