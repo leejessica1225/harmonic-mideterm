@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entries</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 40px;
+      transition: background 0.3s;
+    }
+
+    .box {
+      width: 220px;
+      height: 220px;
+      background: #dcdcdc;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+      background: #bdbdbd;
+    }
+
+    /* Overlay for fullscreen image */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .overlay img {
+      max-width: 90%;
+      max-height: 85%;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      margin-bottom: 40px;
+    }
+
+    .back-btn {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- Boxes -->
+  <div class="box" data-img="mockup1.jpg">Entry 1</div>
+  <div class="box" data-img="mockup2.jpg">Entry 2</div>
+  <div class="box" data-img="mockup3.jpg">Entry 3</div>
+  <div class="box" data-img="mockup4.jpg">Entry 4</div>
+  <div class="box" data-img="mockup5.jpg">Entry 5</div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay">
+    <img src="" alt="Mockup" id="overlay-img" />
+    <button class="back-btn" id="goBack">go back</button>
+  </div>
+
+  <script>
+    const boxes = document.querySelectorAll('.box');
+    const overlay = document.getElementById('overlay');
+    const overlayImg = document.getElementById('overlay-img');
+    const goBackBtn = document.getElementById('goBack');
+
+    boxes.forEach(box => {
+      box.addEventListener('click', () => {
+        const imgSrc = box.getAttribute('data-img');
+        overlayImg.src = imgSrc;
+        overlay.classList.add('active');
+      });
+    });
+
+    goBackBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      overlayImg.src = '';
+    });
+  </script>
+</body>
+</html>
